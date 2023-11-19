@@ -12,3 +12,34 @@ jobs:
           node-version: '14'
       - run: npm install -g bats
       - run: bats -v
+
+name: update-repositories
+run-name: Updating project information
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'  # Runs every 12 hours
+
+jobs:
+  update-repos:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+
+    - name: Run script
+      run: node index.js
+
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "harukayamamotodev@gmail.com"
+        git config --local user.name "HarukaYamamoto0"
+        git add respos-sabe.json
+        git commit -m "Update repository information"
+        git push
