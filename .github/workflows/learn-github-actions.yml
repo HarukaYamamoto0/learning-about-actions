@@ -1,9 +1,9 @@
 name: update-repositories
 run-name: Updating project information
 
-on:
-  schedule:
-    - cron: '0 */12 * * *'  # Runs every 12 hours
+on: [push]
+  # schedule:
+    #- cron: '0 */12 * * *'  # Runs every 12 hours
 
 jobs:
   update-repos:
